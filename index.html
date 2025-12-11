@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nice Blue</title> <style>
+<title>Nice Blue</title> 
+
+<style>
 /* ===============================
    PALETA
    =============================== */
@@ -87,7 +89,7 @@ header p{
 }
 
 /* ===============================
-   GALERÍA - nuevo estilo
+   GALERÍA
    =============================== */
 .gallery-box{
   display:flex;
@@ -332,8 +334,9 @@ header p{
   <span onclick="openSection('contact')">Contacto</span>
 </div>
 
-<div id="about" class="section" style="display:block; opacity:1;">
-  <p>Soy el **programador** detrás de Nice Blue. Aquí comparto ilustraciones, diseños y productos hechos con dedicación.</p> </div>
+<div id="about" class="section">
+  <p>Soy el programador detrás de Nice Blue. Aquí comparto ilustraciones, diseños y productos hechos con dedicación.</p> 
+</div>
 
 <div id="gallery" class="section">
   <h2 style="text-align:center; color:var(--accent); margin-top:0;">Galería</h2>
@@ -420,6 +423,12 @@ function openSection(id){
   block.style.animation="fadeUp .4s forwards";
   block.scrollIntoView({behavior:'smooth'});
 }
+
+/* Establece 'contact' como la sección inicial */
+document.addEventListener('DOMContentLoaded', () => {
+    openSection('contact');
+});
+
 
 /* ===============================
    GALERÍA
