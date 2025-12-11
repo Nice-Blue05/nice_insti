@@ -3,563 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nice Blue</title> 
+<title>Art Haven</title>
 
 <style>
-/* ===============================
-   PALETA
-   =============================== */
-:root{
-  --bg:#f6f4ef;
-  --text:#333;
-  --accent:#a87d5f;
-  --dark:#3c3c3c;
-  --box:#ffffff;
-  --soft:#c9c3ba;
-}
+    body{
+        margin:0;
+        font-family: Arial, sans-serif;
+        background:#f4f1ea;
+    }
 
-/* ===============================
-   GENERAL
-   =============================== */
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family:"Poppins", sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
+    header{
+        background:#a97b5d;
+        padding:40px 0;
+        text-align:center;
+        color:white;
+        font-size:32px;
+        font-weight:bold;
+    }
 
-/* ===============================
-   HEADER
-   =============================== */
-header{
-  padding:70px 20px;
-  text-align:center;
-  background:var(--accent);
-  color:#fff;
-}
-header h1{
-  margin:0;
-  font-size:3.8rem;
-  font-weight:800;
-}
-header p{
-  margin-top:8px;
-  opacity:.9;
-}
+    nav{
+        background:white;
+        padding:15px;
+        text-align:center;
+        box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
 
-/* ===============================
-   MENU
-   =============================== */
-.menu{
-  text-align:center;
-  margin:25px 0;
-}
-.menu span{
-  margin:0 18px;
-  cursor:pointer;
-  font-weight:600;
-  transition:.25s;
-  color:var(--dark);
-}
-.menu span:hover{
-  color:var(--accent);
-  text-decoration:underline;
-}
+    nav button{
+        margin:0 10px;
+        padding:10px 20px;
+        border:none;
+        background:#d6c7b6;
+        cursor:pointer;
+        border-radius:5px;
+        transition:0.3s;
+    }
 
-/* ===============================
-   SECCIONES
-   =============================== */
-.section{
-  width:80%;
-  max-width:1100px;
-  margin:20px auto;
-  background:var(--box);
-  padding:20px;
-  border-radius:12px;
-  display:none;
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp .4s forwards;
-  box-shadow:0 0 12px #0002;
-}
+    nav button:hover{
+        background:#bfa994;
+    }
 
-@keyframes fadeUp{
-  to{ opacity:1; transform:translateY(0); }
-}
+    .section{
+        display:none;
+        padding:40px;
+        max-width:800px;
+        margin:auto;
+        background:white;
+        border-radius:10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.1);
+        margin-top:40px;
+    }
 
-/* ===============================
-   GALERÍA
-   =============================== */
-.gallery-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
+    /* Chatbot */
+    #chatbot-button{
+        position:fixed;
+        bottom:20px;
+        right:20px;
+        background:#a97b5d;
+        color:white;
+        border:none;
+        border-radius:50%;
+        width:60px;
+        height:60px;
+        cursor:pointer;
+        font-size:24px;
+    }
 
-.slider{
-  position:relative;
-  width:85%;
-  max-width:750px;
-  aspect-ratio:4/3;
-  overflow:hidden;
-  border-radius:16px;
-  border:4px solid var(--accent);
-  background:#fff;
-}
+    #chatbot{
+        position:fixed;
+        bottom:90px;
+        right:20px;
+        width:300px;
+        background:white;
+        border-radius:10px;
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+        display:none;
+        flex-direction:column;
+    }
 
-.slide{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:opacity .6s;
-}
-.slide.active{ opacity:1; }
+    #chatbot-header{
+        background:#a97b5d;
+        color:white;
+        padding:10px;
+        border-radius:10px 10px 0 0;
+        text-align:center;
+    }
 
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  padding:10px 14px;
-  font-size:1.4rem;
-  border-radius:10px;
-  cursor:pointer;
-}
-#left{ left:12px; }
-#right{ right:12px; }
+    #chatbot-messages{
+        padding:10px;
+        height:250px;
+        overflow-y:auto;
+        font-size:14px;
+    }
 
-.dots{
-  display:flex;
-  gap:10px;
-}
-.dot{
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:var(--soft);
-  cursor:pointer;
-}
-.dot.active{ background:var(--accent); }
+    #chatbot-input{
+        display:flex;
+        border-top:1px solid #ccc;
+    }
 
-/* ===============================
-   STORE
-   =============================== */
-.store-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:20px;
-}
-.item{
-  background:#fff;
-  border:1px solid var(--soft);
-  border-radius:12px;
-  padding:12px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  box-shadow:0 4px 10px #0001;
-}
-.item img{
-  width:100%;
-  max-height:190px;
-  object-fit:contain;
-  background:#fafafa;
-  border-radius:8px;
-}
-.btn{
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
-  margin-top:6px;
-}
+    #chatbot-input input{
+        width:80%;
+        border:none;
+        padding:10px;
+    }
 
-/* ===============================
-   CARRITO flotante
-   =============================== */
-.cart-btn{
-  position:fixed;
-  right:20px;
-  bottom:90px;
-  width:58px;
-  height:58px;
-  background:var(--accent);
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-  cursor:pointer;
-  box-shadow:0 10px 30px #0004;
-  font-size:1.6rem;
-  z-index:1000;
-}
+    #chatbot-input button{
+        width:20%;
+        border:none;
+        background:#a97b5d;
+        color:white;
+        cursor:pointer;
+    }
 
-#cart{
-  position:fixed;
-  right:20px;
-  top:90px;
-  width:310px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 12px 30px #0004;
-  padding:12px;
-  display:none;
-  flex-direction:column;
-  gap:10px;
-  z-index:1000;
-}
-
-.cart-item{
-  display:flex;
-  gap:8px;
-  border-bottom:1px dashed #eee;
-  padding-bottom:8px;
-}
-.cart-item img{
-  width:50px;
-  height:50px;
-  object-fit:cover;
-  border-radius:6px;
-}
-
-.qty-btn{
-  background:#fff;
-  border:1px solid var(--soft);
-  padding:4px 8px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-.cart-footer{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-}
-
-/* ===============================
-   CHATBOT
-   =============================== */
-.chat-btn{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:58px;
-  height:58px;
-  background:var(--dark);
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-  cursor:pointer;
-  box-shadow:0 10px 30px #0004;
-  font-size:1.6rem;
-  z-index:1000;
-}
-
-#chat{
-  position:fixed;
-  right:20px;
-  bottom:85px;
-  width:310px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 12px 30px #0004;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  z-index:1000;
-}
-
-.chat-header{
-  background:var(--dark);
-  color:#fff;
-  padding:10px;
-  display:flex;
-  justify-content:space-between;
-}
-.chat-body{
-  padding:10px;
-  max-height:250px;
-  overflow:auto;
-  background:#f7f7f7;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.msg{
-  padding:8px 10px;
-  border-radius:10px;
-  max-width:75%;
-}
-.bot{ background:#fff; border:1px solid #eee; }
-.user{ background:var(--accent); color:#fff; align-self:flex-end; }
-
-.chat-input{
-  display:flex;
-  padding:10px;
-  gap:8px;
-}
-.chat-input input{
-  flex:1;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ddd;
-}
-
-/* =============================== */
 </style>
 </head>
+
 <body>
 
-<header>
-  <h1>NICE BLUE</h1>   <p>Ilustración, diseño & creatividad moderna</p>
-</header>
+<header>ART HAVEN</header>
 
-<div class="menu">
-  <span onclick="openSection('about')">Sobre mí</span>
-  <span onclick="openSection('gallery')">Galería</span>
-  <span onclick="openSection('store')">Tienda</span>
-  <span onclick="openSection('contact')">Contacto</span>
+<nav>
+    <button onclick="mostrar('sobre')">Sobre mí</button>
+    <button onclick="mostrar('galeria')">Galería</button>
+    <button onclick="mostrar('tienda')">Tienda</button>
+    <button onclick="mostrar('contacto')">Contacto</button>
+</nav>
+
+<!-- Secciones -->
+<div id="sobre" class="section">Bienvenido a la sección “Sobre mí”. Aquí puedes describirte.</div>
+<div id="galeria" class="section">Esta es tu galería. Aquí puedes poner tus ilustraciones.</div>
+<div id="tienda" class="section">Aquí va tu tienda de productos.</div>
+<div id="contacto" class="section">
+    Correo: arthaven@gmail.com <br>
+    IG: @arthaven.art
 </div>
 
-<div id="about" class="section">
-  <p>Soy el programador detrás de Nice Blue. Aquí comparto ilustraciones, diseños y productos hechos con dedicación.</p> 
-</div>
+<!-- Chatbot -->
+<button id="chatbot-button" onclick="toggleChat()">💬</button>
 
-<div id="gallery" class="section">
-  <h2 style="text-align:center; color:var(--accent); margin-top:0;">Galería</h2>
-
-  <div class="gallery-box">
-    <div class="slider" id="slider">
-      <img src="images/imgA.jpg" class="slide active">
-      <img src="images/imgB.jpg" class="slide">
-      <img src="images/imgC.jpg" class="slide">
-
-      <button id="left" class="arrow">‹</button>
-      <button id="right" class="arrow">›</button>
-    </div>
-
-    <div class="dots">
-      <div class="dot active" data-i="0"></div>
-      <div class="dot" data-i="1"></div>
-      <div class="dot" data-i="2"></div>
-    </div>
-  </div>
-</div>
-
-<div id="store" class="section">
-  <h2 style="margin-top:0;color:var(--accent)">Tienda</h2>
-  <p>Productos disponibles:</p>
-
-  <div class="store-grid">
-    <div class="item" data-id="print1" data-price="12.00">
-      <img src="images/store/print1.jpg">
-      <strong>Lámina A5</strong>
-      <span>S/ 12.00</span>
-      <button class="btn" onclick="addItem('print1')">Agregar</button>
-    </div>
-
-    <div class="item" data-id="bookmark" data-price="4.00">
-      <img src="images/store/bookmark.jpg">
-      <strong>Bookmark</strong>
-      <span>S/ 4.00</span>
-      <button class="btn" onclick="addItem('bookmark')">Agregar</button>
-    </div>
-  </div>
-</div>
-
-<div id="contact" class="section">
-  <p>Correo: **niceblue@gmail.com**<br>IG: **@Nice_Blue**</p> </div>
-
-<div class="cart-btn" onclick="toggleCart()">🛒</div>
-
-<div id="cart">
-  <strong>Carrito</strong>
-  <div id="cartList"></div>
-  <div class="cart-footer">
-    <span id="cartTotal">Total: S/ 0.00</span>
-    <button class="qty-btn" onclick="clearCart()">Vaciar</button>
-  </div>
-</div>
-
-<div class="chat-btn" onclick="toggleChat()">💬</div>
-
-<div id="chat">
-  <div class="chat-header">
-    <span>Chat — Nice Blue</span>
-    <button class="qty-btn" onclick="toggleChat()">✕</button>
-  </div>
-
-  <div class="chat-body" id="chatBody">
-    <div class="msg bot">Hola 👋 Pregunta por: envío, precio, pago o stock.</div>
-  </div>
-
-  <div class="chat-input">
-    <input id="chatInput" placeholder="Escribe..." onkeydown="if(event.key==='Enter') sendMsg()">
-    <button class="btn" onclick="sendMsg()">Enviar</button>
-  </div>
+<div id="chatbot">
+    <div id="chatbot-header">Chatbot</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+        <input type="text" id="mensaje" placeholder="Escribe...">
+        <button onclick="enviarMensaje()">➤</button>
+    </div>
 </div>
 
 <script>
-/* ===============================
-   CAMBIO DE SECCIONES
-   =============================== */
-function openSection(id){
-  document.querySelectorAll('.section').forEach(s=> s.style.display='none');
-  const block = document.getElementById(id);
-  block.style.display="block";
-  block.style.animation="fadeUp .4s forwards";
-  block.scrollIntoView({behavior:'smooth'});
-}
+    function mostrar(id){
+        document.querySelectorAll('.section').forEach(sec => sec.style.display = "none");
+        document.getElementById(id).style.display = "block";
+    }
 
-/* * Establece 'contact' como la sección inicial al cargar la página. 
-* Esto reemplaza la inicialización previa de 'about'.
-*/
-document.addEventListener('DOMContentLoaded', () => {
-    openSection('contact'); 
-});
+    function toggleChat(){
+        let chat = document.getElementById("chatbot");
+        chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+    }
 
+    function enviarMensaje(){
+        let mensaje = document.getElementById("mensaje").value;
+        if(mensaje.trim() === "") return;
 
-/* ===============================
-   GALERÍA
-   =============================== */
-let idx = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-
-function show(i){
-  slides.forEach(s=>s.classList.remove('active'));
-  dots.forEach(d=>d.classList.remove('active'));
-
-  idx = (i + slides.length) % slides.length;
-
-  slides[idx].classList.add('active');
-  dots[idx].classList.add('active');
-}
-
-document.getElementById('right').onclick = ()=>show(idx+1);
-document.getElementById('left').onclick  = ()=>show(idx-1);
-dots.forEach(d=> d.onclick = ()=>show(parseInt(d.dataset.i)));
-
-setInterval(()=>show(idx+1), 4500);
-
-/* ===============================
-   CARRITO
-   =============================== */
-let CART = {};
-
-function addItem(id){
-  const item = document.querySelector(`.item[data-id="${id}"]`);
-  const price = parseFloat(item.dataset.price);
-  const title = item.querySelector('strong').innerText;
-  const img = item.querySelector('img').src;
-
-  if(!CART[id]) CART[id] = {title, price, qty:1, img};
-  else CART[id].qty++;
-
-  renderCart();
-  document.getElementById('cart').style.display='flex';
-}
-
-function renderCart(){
-  const list = document.getElementById('cartList');
-  list.innerHTML='';
-  let total=0;
-
-  Object.keys(CART).forEach(k=>{
-    const it = CART[k];
-    total += it.qty * it.price;
-
-    list.innerHTML += `
-      <div class="cart-item">
-        <img src="${it.img}">
-        <div style="flex:1">
-          <strong>${it.title}</strong><br>
-          <small>S/ ${it.price.toFixed(2)} x ${it.qty}</small>
-        </div>
-        <div>
-          <button class="qty-btn" onclick="updateQty('${k}',1)">+</button>
-          <button class="qty-btn" onclick="updateQty('${k}',-1)">-</button>
-        </div>
-      </div>`;
-  });
-
-  document.getElementById('cartTotal').innerText =
-    `Total: S/ ${total.toFixed(2)}`;
-}
-
-function updateQty(id, d){
-  CART[id].qty += d;
-  if(CART[id].qty <=0) delete CART[id];
-  renderCart();
-}
-
-function toggleCart(){
-  const c = document.getElementById('cart');
-  c.style.display = c.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function clearCart(){
-  CART = {};
-  renderCart();
-}
-
-/* ===============================
-   CHATBOT
-   =============================== */
-function toggleChat(){
-  const c = document.getElementById('chat');
-  c.style.display = c.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function addMsg(text, who="bot"){
-  const m = document.createElement('div');
-  m.className = "msg " + who;
-  m.innerText = text;
-  chatBody.appendChild(m);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function sendMsg(){
-  const input = document.getElementById('chatInput');
-  const t = input.value.trim();
-  if(!t) return;
-
-  addMsg(t,"user");
-  input.value="";
-
-  const key = t.toLowerCase();
-
-  setTimeout(()=>{
-    if(key.includes("envio")){
-      addMsg("Realizamos envíos locales 2–4 días.");
-    }
-    else if(key.includes("precio")){
-      addMsg("Los precios están en la sección Tienda.");
-    }
-    else if(key.includes("pago")){
-      addMsg("Métodos disponibles: transferencia o efectivo.");
-    }
-    else if(key.includes("stock")){
-      addMsg("Siempre intentamos mantener stock disponible.");
-    }
-    else{
-      addMsg("No entendí 😅 Intenta con: envío, precio, pago, stock.");
-    }
-  },600);
-}
+        let chat = document.getElementById("chatbot-messages");
+        chat.innerHTML += `<div><strong>Tú:</strong> ${mensaje}</div>`;
+        chat.innerHTML += `<div><strong>Bot:</strong> ¡Gracias por tu mensaje! 😊</div>`;
+        
+        document.getElementById("mensaje").value = "";
+        chat.scrollTop = chat.scrollHeight;
+    }
 </script>
 
 </body>
